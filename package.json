@@ -1,6 +1,6 @@
 {
   "name": "local-proxy-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "一个轻量代理请求到本地文件的服务器",
   "bin": "./bin/local-proxy-server",
   "scripts": {
@@ -8,7 +8,13 @@
     "dev": "nodemon --inspect lib/server.js -c example/conf.js",
     "postversion": "npm publish && git push --tags && git push"
   },
-  "keywords": ["local file", "proxy", "http-proxy-middleware", "koa", "path-to-regexp"],
+  "keywords": [
+    "local file",
+    "proxy",
+    "http-proxy-middleware",
+    "koa",
+    "path-to-regexp"
+  ],
   "author": "MwumLi <mwumli@hotmail.com>",
   "license": "ISC",
   "repository": {
