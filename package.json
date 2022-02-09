@@ -4,10 +4,11 @@
   "description": "一个轻量代理请求到本地文件的服务器",
   "bin": "./bin/local-proxy-server",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon --inspect lib/server.js"
+    "start": "node lib/server.js -c example/conf.js",
+    "dev": "nodemon --inspect lib/server.js -c example/conf.js",
+    "postversion": "npm publish && git push --tags && git push"
   },
-  "keywords": [],
+  "keywords": ["local file", "proxy", "http-proxy-middleware", "koa", "path-to-regexp"],
   "author": "MwumLi <mwumli@hotmail.com>",
   "license": "ISC",
   "repository": {
@@ -19,9 +20,12 @@
   },
   "nodemonConfig": {
     "delay": 300,
-    "watch": ["lib"]
+    "watch": [
+      "lib"
+    ]
   },
   "dependencies": {
+    "debug": "^4.3.3",
     "http-proxy-middleware": "^2.0.2",
     "koa": "^2.13.4",
     "koa-body": "^4.2.0",
