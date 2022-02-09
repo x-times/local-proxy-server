@@ -5,7 +5,7 @@
   "bin": "./bin/local-proxy-server",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --inspect server.js"
+    "dev": "nodemon --inspect lib/server.js"
   },
   "keywords": [],
   "author": "MwumLi <mwumli@hotmail.com>",
@@ -17,6 +17,10 @@
   "engines": {
     "node": ">=8.0.0"
   },
+  "nodemonConfig": {
+    "delay": 300,
+    "watch": ["lib"]
+  },
   "dependencies": {
     "http-proxy-middleware": "^2.0.2",
     "koa": "^2.13.4",
@@ -24,5 +28,8 @@
     "koa2-connect": "^1.0.2",
     "minimist": "^1.2.5",
     "path-to-regexp": "^6.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
