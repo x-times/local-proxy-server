@@ -20,11 +20,14 @@ const defaultConf = {
 const { localRules, server, proxy, historyApiFallback } = fs.existsSync(confFile) ?require(confFile) : defaultConf;
 
 const app = new Koa();
-app.use(koaBody());
+
 // 代理到服务器
 if (proxy) {
   proxyService(app, proxy)
 }
+
+// 在代理服务之后解析 body, 否则解析后 body 被代理服务无法识别引发接口请求错误
+app.use(koaBody());
 
 // 代理文件到本地文件
 if (localRules) {
