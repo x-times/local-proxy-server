@@ -83,7 +83,7 @@ function proxyLocal(app, localRules) {
   });
 }
 
-function parseConfFilepath(conf = './conf.js') {
+function parseConfFilepath(conf = './local-proxy-server.conf.js') {
   if (path.isAbsolute(conf)) {
     return conf;
   }
@@ -122,7 +122,7 @@ function getAllInterfaces() {
  * @param {*} param2 
  * @returns 
  */
-async function sendFile(ctx, filepath, { index, maxAge = 0, immutable = false }) {
+async function sendFile(ctx, filepath, { index, maxAge = 0, immutable = false } = {}) {
   const stat = util.promisify(fs.stat);
   let stats
   try {

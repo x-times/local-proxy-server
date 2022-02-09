@@ -11,7 +11,7 @@
 # 安装
 $ npm i -g local-proxy-server
 
-# 默认启动在 3000 端口, 并且加载当前执行目录的 conf.js
+# 默认启动在 3000 端口, 并且加载当前执行目录的 local-proxy-server.conf.js
 $ local-proxy-server
 
 # 指定配置文件
@@ -20,12 +20,13 @@ $ local-proxy-server -c conf.js
 
 ## 配置参考
 
+默认加载配置文件为命令执行目录的 `local-proxy-server.conf.js`  
 
 ``` javascript
 const path = require('path');
 const cwd = process.cwd();
 const applictionPath = function (...paths) {
-  path.join(cwd, 'application', ...paths);
+  return path.join(cwd, 'application', ...paths);
 }
 module.exports = {
   server: {
