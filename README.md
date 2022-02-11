@@ -49,4 +49,20 @@ $ DEBUG=local-proxy-server local-proxy-server
 
 * `proxy`: 指定接口代理服务规则, 符合 [webpack-dev-server 指定的 proxy 规则](https://webpack.docschina.org/configuration/dev-server/#devserverproxy)  
 
+* `cache`: 代理缓存函数。如果设置缓存函数, 那么代理请求将会执行缓存策略。
 
+## 代理缓存
+
+缓存函数原型:  
+
+```
+// 返回缓存地址
+({stage, req}) => string;
+```
+
+当设置缓存函数, 则代理请求会进行缓存以及响应:  
+
+1. 当请求发生的时候, 如果能命中缓存, 则直接返回缓存;   
+2. 如果不能命中, 则请求代理服务, 缓存服务结果, 返回响应值;  
+
+`cache` 是根据请求返回数据缓存路径, 因此命中缓存以及缓存响应的都是利用 `cache` 的返回结果。  
