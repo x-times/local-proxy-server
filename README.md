@@ -43,7 +43,7 @@ $ DEBUG=local-proxy-server local-proxy-server
 
 * `localRules`: 数组, 指定多组本地代理规则  
   * `rule.path`: 指定匹配规则, 符合 `koa`路径匹配规则  
-  * `rule.filepath(ctx): string`: 本地映射规则, 类型为函数, 接受 koa ctx, 返回后的本地文件绝对路径  
+  * `rule.filepath(ctx): string | string[]`: 本地映射规则, 类型为函数, 接受 koa ctx, 返回后的本地文件绝对路径  
 
 * `historyApiFallback`: 适应 SPA 应用, 针对没有匹配到的请求指定本地映射路径  
 
@@ -76,7 +76,6 @@ $ DEBUG=local-proxy-server local-proxy-server
 `cache` 是根据请求返回数据缓存路径, 因此命中缓存以及缓存响应的都是利用 `cache` 的返回结果。  
 
 ## 代理缓存对象  
-
 
 ```
 {
