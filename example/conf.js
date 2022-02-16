@@ -18,7 +18,7 @@ module.exports = {
     },
     // 映射资源路径到具体文件
     {
-      path: '(.*)',
+      path: /^(!\/api\/v2).*$/,
       filepath: (ctx) => {
         const pathFunc =(v = 'index.html') => applicationPath('web', v);
         if (path.extname(ctx.path).length) return pathFunc(ctx.path);
@@ -30,15 +30,27 @@ module.exports = {
   historyApiFallback: applicationPath('web'),
   // 可以对部门 API 代理已有的服务上
   proxy: {
-    '/api/v2': {
-      target: 'https://10.48.73.210:8443',
+    '/api': {
+      target: 'http://localhost:3001',
+      changeOrigin: true,
+      secure: false
+    },
+    '/mock': {
+      target: 'http://localhost:3001',
       changeOrigin: true,
       secure: false
     }
   },
-  cache: ({req, stage}) => {
-    console.log(`${stage} - ${req.method} ${req.path}`);
-    const filepath = req.method + '__' + req.path.replace(/\//g, '__') + '.json';
-    return path.join(__dirname, '.cache', filepath);
+  cache: {
+    // 优先从 data 目录去匹配, 次之从 .cache 目录匹配
+    matchCacheFilepath: ({req, stage}) => {
+      const filepath = req.method + '__' + req.path.replace(/\//g, '__') + '.json';
+      return [path.join(__dirname, 'data', filepath), path.join(__dirname, '.cache', filepath)];
+    },
+    cacheFilepath: ({req, stage}) => {
+      console.log(`${stage} - ${req.method} ${req.path}`);
+      const filepath = req.method + '__' + req.path.replace(/\//g, '__') + '.json';
+      return path.join(__dirname, '.cache', filepath);
+    },
   }
 }

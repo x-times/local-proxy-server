@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node lib/server.js -c example/conf.js",
     "dev": "nodemon --inspect lib/server.js -c example/conf.js",
+    "demoServer": "nodemon example/demo-server.js",
     "postversion": "npm publish && git push --tags && git push"
   },
   "keywords": [
